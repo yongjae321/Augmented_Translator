@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Augmented Translator Editor</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Augmented Translator Editor</h1>
+      <div class="provider-controls">
+        <label>Providers</label>
+        <div id="provider-toggles" class="toggle-list"></div>
+        <button id="refresh-candidates" type="button">Refresh candidates</button>
+      </div>
+      <div class="context-controls">
+        <label for="context-input">Context (title/summary/instructions)</label>
+        <textarea id="context-input" rows="2" placeholder="Book title, author, chapter summary, translation brief..."></textarea>
+      </div>
+      <div class="actions">
+        <button id="save-state" type="button">Save workspace</button>
+        <button id="load-state" type="button">Load workspace</button>
+        <button id="export-editor" type="button">Export editor text</button>
+        <button id="toggle-preview" type="button">Toggle preview</button>
+      </div>
+    </header>
+
+    <main id="workspace" class="workspace three-column">
+      <section class="pane" id="source-pane">
+        <h2>1) Original text</h2>
+        <p class="hint">Hover to preview mapping, click to focus sentence.</p>
+        <textarea id="source-input" rows="8" placeholder="Paste source chapter text here..."></textarea>
+        <button id="segment-source" type="button">Segment source</button>
+        <ul id="source-sentences" class="sentence-list"></ul>
+      </section>
+
+      <section class="pane" id="candidate-pane">
+        <h2>2) Translation candidates</h2>
+        <p class="hint">Candidates for selected source sentence(s).</p>
+        <div id="candidate-list" class="candidate-list"></div>
+      </section>
+
+      <section class="pane" id="editor-pane">
+        <h2>3) Translation editor</h2>
+        <p class="hint">Click a candidate to insert/replace text; edit freely afterwards.</p>
+        <textarea id="editor-output" rows="20" placeholder="Your final translation text..."></textarea>
+      </section>
+    </main>
+
+    <aside id="preview-pane" class="preview-pane hidden">
+      <h2>4) Markup preview</h2>
+      <div id="preview-output"></div>
+    </aside>
+
+    <template id="sentence-item-template">
+      <li class="sentence-item" tabindex="0"></li>
+    </template>
+
+    <template id="candidate-template">
+      <article class="candidate" tabindex="0">
+        <header>
+          <strong class="provider-name"></strong>
+          <span class="mapping"></span>
+        </header>
+        <p class="candidate-text"></p>
+      </article>
+    </template>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
