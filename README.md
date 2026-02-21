@@ -75,3 +75,44 @@ npm start
 ```
 
 Set environment variable `PORT` if your host requires it.
+
+## Resolving GitHub PR conflicts (README.md, app.js, index.html, styles.css)
+
+If GitHub reports conflicts on this branch, resolve them from the command line:
+
+```bash
+# from this repo
+
+git fetch origin
+
+git checkout work
+
+git merge origin/main
+
+# resolve conflicts in:
+# - README.md
+# - app.js
+# - index.html
+# - styles.css
+
+# after editing conflict markers:
+
+git add README.md app.js index.html styles.css
+
+git commit -m "Resolve merge conflicts with main"
+
+git push origin work
+```
+
+Quick checks before pushing:
+
+```bash
+node --check app.js
+git diff --check
+```
+
+Tip: search for conflict markers to ensure none remain:
+
+```bash
+rg "^(<<<<<<<|=======|>>>>>>>)" README.md app.js index.html styles.css
+```
