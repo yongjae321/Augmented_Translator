@@ -33,6 +33,45 @@ When you click **Request translation**:
 - If live API is disabled or key is empty, the app falls back to deterministic mock responses.
 - This is still a client-side prototype. In production, place API calls behind your backend.
 
-## Run
+## Local run
+
+### Option A: open directly
 
 Open `index.html` in a modern browser.
+
+### Option B: run bundled local server
+
+```bash
+npm start
+```
+
+The app will be served at `http://localhost:8080` (or `PORT` env override).
+
+## Deployment
+
+Because this project is static files plus an optional tiny Node server, deploy in one of the following ways.
+
+### 1) Static hosting (GitHub Pages / Netlify / Cloudflare Pages / Vercel static)
+
+- Build command: **none**
+- Publish directory: repository root (`.`)
+- Entry file: `index.html`
+
+### 2) Container deployment (Render / Railway / Fly.io / ECS / Cloud Run)
+
+Build and run:
+
+```bash
+docker build -t augmented-translator .
+docker run --rm -p 8080:8080 augmented-translator
+```
+
+Then open `http://localhost:8080`.
+
+### 3) Node process deployment
+
+```bash
+npm start
+```
+
+Set environment variable `PORT` if your host requires it.
